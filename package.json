@@ -1,0 +1,107 @@
+{
+  "name": "multiple-find-replace",
+  "displayName": "multiple-find-replace",
+  "description": "Multiple find and replace",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.88.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "multiple-find-replace.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "multiple-find-replace.showId",
+        "title": "Show ID"
+      },
+      {
+        "command": "multiple-find-replace.openTemplate",
+        "title": "Open Template"
+      },
+      {
+        "command": "multiple-find-replace.replace",
+        "title": "Multiple Replace"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "multiple-find-replace.openTemplate",
+          "when": "resourceFilename != multiple-find-replace.txt",
+          "group": "mygroup@1",
+          "submenu": "multiple-find-replace.operations"
+        },
+        {
+          "command": "multiple-find-replace.replace",
+          "when": "resourceFilename != multiple-find-replace.txt",
+          "group": "mygroup@2",
+          "submenu": "multiple-find-replace.operations"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "multiple-find-replace.operations",
+        "label": "Multiple Find Replace"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "splitSyntax": {
+          "type": "string",
+          "default": " => ",
+          "description": "The syntax used to split each line between the FIND and REPLACE statements",
+          "order": 1
+        },
+        "matchCase": {
+          "type": "boolean",
+          "description": "Case sensitive or disable it for case insensitive.",
+          "default": true,
+          "order": 2
+        },
+        "wholeWord": {
+          "type": "boolean",
+          "title": "Whole word",
+          "description": "Find only whole words.",
+          "default": false,
+          "order": 3
+        },
+        "displayNotifications": {
+          "type": "boolean",
+          "description": "Display plugin notifications as confirmations of tasks done.",
+          "default": true,
+          "order": 4
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.88.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-cli": "^0.0.8",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@vscode/vsce": "^2.26.1"
+  }
+}
